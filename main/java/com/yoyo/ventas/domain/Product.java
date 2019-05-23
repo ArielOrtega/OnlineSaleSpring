@@ -1,6 +1,7 @@
 package com.yoyo.ventas.domain;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
@@ -10,9 +11,11 @@ public class Product {
 	private float price;
 	private int stockUnits;
 	private List<Image> images;
+	private Category category;
 	
 	public Product() {
-		
+		images = new ArrayList<>();
+		category = new Category();
 	}
 
 	public int getProductId() {
@@ -62,6 +65,15 @@ public class Product {
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	
 	
 }
