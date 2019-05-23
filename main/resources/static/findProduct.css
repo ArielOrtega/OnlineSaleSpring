@@ -50,9 +50,3 @@ header {
 	background: rgb(231,145,64);
 	background: linear-gradient(90deg, rgba(231,145,64,1) 0%, rgba(208,226,60,1) 100%);
 }
-
-.container {
-	background: #ffffff;
-	padding-top: 30px;
-	padding-bottom: 20px;
-}

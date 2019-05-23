@@ -9,7 +9,7 @@ public class Product {
 	private String productName;
 	private String description;
 	private float price;
-	private int stockUnits;
+	private float stockUnits;
 	private List<Image> images;
 	private Category category;
 	
@@ -50,11 +50,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public int getStockUnits() {
+	public float getStockUnits() {
 		return stockUnits;
 	}
 
-	public void setStockUnits(int stockUnits) {
+	public void setStockUnits(float stockUnits) {
 		this.stockUnits = stockUnits;
 	}
 
