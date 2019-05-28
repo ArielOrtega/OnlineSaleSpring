@@ -10,12 +10,14 @@ public class Client {
 	private String lastName;
 	private String firstName;
 	private boolean isSuscribed;
+	private List<Role> roles;
 	private ContactInformation contactInformation;
 	private List<Address> addresses;
 	
 	public Client() {
 		contactInformation = new ContactInformation();
 		addresses = new ArrayList<>();
+		roles = new ArrayList<>();
 	}
 
 	public int getClienteId() {
@@ -64,6 +66,14 @@ public class Client {
 
 	public void setSuscribed(boolean isSuscribed) {
 		this.isSuscribed = isSuscribed;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public ContactInformation getContactInformation() {

@@ -13,7 +13,7 @@ public class ProductController {
 	@Autowired
 	private ProductBusiness productBusiness;
 	
-	@RequestMapping(value="/products", method=RequestMethod.GET)
+	@RequestMapping(value="/store/products", method=RequestMethod.GET)
 	public String initiate(Model model) {
 		model.addAttribute("products", productBusiness.findTop());
 		return "findProducts";

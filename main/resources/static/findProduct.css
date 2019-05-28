@@ -42,8 +42,7 @@ header {
 }
 
 .register {
-    background: rgb(59,68,158);
-	background-color: linear-gradient(0deg, rgba(56,65,150,1) 28%, rgba(141,141,242,1) 78%);
+    padding-top: 10%;
 }
 
 .login {
