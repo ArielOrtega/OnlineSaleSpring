@@ -28,8 +28,8 @@ public class UserData {
 	private DataSource dataSource;
 	
 	public Client findByEmail(String email) {
-		String selectSql = "Select c.id_end_user, c.is_suscribed, c.last_name, c.first_name, c.login , c.password, r.id_rol, r.type_name as role_name from client c, userrole r" + 
-				" where c.id_rol = r.id_rol and c.login = '" + email + "'";
+		String selectSql = "Select c.id_end_user, c.is_suscribed, c.last_name, c.first_name, c.username , c.password, r.id_rol, r.type_name as role_name from client c, userrole r" + 
+				" where c.id_rol = r.id_rol and c.username = '" + email + "'";
 		List<Client> clients = jdbcTemplate.query(selectSql, new RowMapper<Client>() {
 
 			@Override
@@ -38,11 +38,11 @@ public class UserData {
 				client.setClienteId(rs.getInt("id_end_user"));
 				client.setFirstName(rs.getString("first_name"));
 				client.setLastName(rs.getString("last_name"));
-				client.setUsername(rs.getString("login"));
+				client.setUsername(rs.getString("username"));
 				client.setPassword(rs.getString("password"));
 				client.setSuscribed(rs.getBoolean("is_suscribed"));
 				do {
-					if(rs.getString("login").equals(client.getUsername())) {
+					if(rs.getString("username").equals(client.getUsername())) {
 						Role role = new Role();
 						role.setRolId(rs.getInt("id_rol"));
 						role.setTypeName(rs.getString("role_name"));
@@ -56,8 +56,8 @@ public class UserData {
 	}//fin findByEmail
 	
 	public Employee findEmployeeByEmail(String email) {
-		String selectSql = "Select c.id_employee, c.last_name, c.first_name, c.login , c.password, r.id_rol, r.type_name as role_name from employee c, userrole r" + 
-				" where c.rol_id = r.id_rol and c.login = '" + email + "'";
+		String selectSql = "Select c.id_employee, c.last_name, c.first_name, c.username , c.password, r.id_rol, r.type_name as role_name from employee c, userrole r" + 
+				" where c.rol_id = r.id_rol and c.username = '" + email + "'";
 		List<Employee> employees = jdbcTemplate.query(selectSql, new RowMapper<Employee>() {
 
 			@Override
@@ -66,10 +66,10 @@ public class UserData {
 				employee .setEmployeeId(rs.getInt("id_employee"));
 				employee .setFirstName(rs.getString("first_name"));
 				employee .setLastName(rs.getString("last_name"));
-				employee .setUsername(rs.getString("login"));
+				employee .setUsername(rs.getString("username"));
 				employee .setPassword(rs.getString("password"));
 				do {
-					if(rs.getString("login").equals(employee.getUsername())) {
+					if(rs.getString("username").equals(employee.getUsername())) {
 						Role role = new Role();
 						role.setRolId(rs.getInt("id_rol"));
 						role.setTypeName(rs.getString("role_name"));

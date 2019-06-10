@@ -16,4 +16,12 @@ public class ProductBusiness {
 	public List<Product> findTop(){
 		return productData.findTop();
 	}
+	
+	public void registerProduct(Product product) {
+		productData.registerProduct(product);
+	}
+	
+	public List<Product> findAll(String title) {
+		return productData.findAll(title);
+	}
 }

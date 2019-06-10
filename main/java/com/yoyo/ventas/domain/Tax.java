@@ -1,6 +1,8 @@
 package com.yoyo.ventas.domain;
 
 public class Tax {
+	
+	private int idTax;
 	private int vat;
 	private int salesTax;
 	private int shippingTax;
@@ -10,6 +12,17 @@ public class Tax {
 	public Tax() {
 		
 	}
+	
+	public int getIdTax() {
+		return idTax;
+	}
+
+
+
+	public void setIdTax(int idTax) {
+		this.idTax = idTax;
+	}
+
 
 
 	public int getVat() {
