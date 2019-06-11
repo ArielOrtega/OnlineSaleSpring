@@ -18,14 +18,27 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-</head>
+
 <body>
 	<div class="container">
-		<h1>Products Maintenance</h1>
+		
+		
+		<div class="form-group" >
+			<h1>Products Maintenance</h1>
+		</div>
+		
 		<form action="#" th:action="@{/home/maintenance}"	method="post">
 				Insert product' name: <input type="text" name="productName" /> <br>  <br>
 				<input type="submit" value="Buscar" />  
 		</form><br>
+		
+		 <!--  <img src="data:image/jpeg;base64,${blob}"/>
+			<img src="image/jpeg;base64,'.base64_encode(${blob}).'"/>
+			<img style="max-height: 100px" src="data:image/jpg;base64,<?php echo base64_encode($blob)>"/> -->
+		
+		
+		
+		
 		<span th:if="${products.isEmpty()}">No results</span>
 		<span th:unless="${products.isEmpty()}">
 		<table class="table table-striped">
@@ -39,7 +52,7 @@
 				<th>Action</th>
 			</tr>
 			
-			<!-- <a th:href="@{/displayBooks(idEditorial=${editorial.idEditorial})}">  -->
+			
 			
 			<tr th:each="p : ${products}">
 				<td><span th:text="${p.productId}"></span></td>
@@ -49,15 +62,17 @@
 				<td><span th:text="${p.stockUnits}"></span></td>
 				<td><span th:text="${p.category.categoryName}"></span></td>
 				
-				<td><img src="image/jpeg;base64,'.base64_encode($blob).'"/></td>
-
-				<td><a th:href="@{/home/editProduct(id=${p.productId} )}">Editar</a>
-				<a th:href="@{/home/deleteProduct(id=${p.productId} )}">Borrar</a></span>
 				
+				
+				<td>
+				<a th:href="@{/home/editProduct(id=${p.productId} )}">Edit</a>
+				<a th:href="@{/home/deleteProduct(id=${p.productId} )}">Delete</a>
 				</td>
+	
 			</tr>
 		</table>
 		</span>
+		
 	</div>
 </body>
 </html>

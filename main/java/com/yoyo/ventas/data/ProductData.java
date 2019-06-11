@@ -50,7 +50,7 @@ public class ProductData {
 				product.getCategory().setCategoryId(rs.getInt(2));
 				product.setDescription(rs.getString(3));
 				product.setPrice(rs.getFloat(4));
-				product.setStockUnits(rs.getFloat(5));
+				product.setStockUnits(rs.getInt(5));
 				product.setProductName(rs.getString(6));
 				products.add(product);
 				product = new Product();
@@ -147,7 +147,7 @@ public class ProductData {
 				product.getCategory().setCategoryName(rs.getString(8));
 				product.setDescription(rs.getString(3));
 				product.setPrice(rs.getFloat(4));
-				product.setStockUnits(rs.getFloat(5));
+				product.setStockUnits(rs.getInt(5));
 				product.setProductName(rs.getString(6));
 		        product.setImages(getImagesProduct(product.getProductId())); 
 				products.add(product);

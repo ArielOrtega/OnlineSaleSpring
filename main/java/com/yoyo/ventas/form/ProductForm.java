@@ -11,7 +11,7 @@ public class ProductForm {
 	@NotNull
 	private float price;
 	@NotNull
-	private float stockUnits;
+	private int stockUnits;
 	@NotNull
 	private int categoryId;
 	@NotNull
@@ -45,11 +45,11 @@ public class ProductForm {
 		this.price = price;
 	}
 
-	public float getStockUnits() {
+	public int getStockUnits() {
 		return stockUnits;
 	}
 
-	public void setStockUnits(float stockUnits) {
+	public void setStockUnits(int stockUnits) {
 		this.stockUnits = stockUnits;
 	}
 

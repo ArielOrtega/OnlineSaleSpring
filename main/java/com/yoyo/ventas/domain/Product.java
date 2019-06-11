@@ -12,7 +12,7 @@ public class Product {
 	private String productName;
 	private String description;
 	private float price;
-	private float stockUnits;
+	private int stockUnits;
 	private Blob[] images;
 	private Category category;
 	
@@ -21,7 +21,7 @@ public class Product {
 		category = new Category();
 	}	
 
-	public Product(String productName, String description, float price, float stockUnits,
+	public Product(String productName, String description, float price, int stockUnits,
 			Blob[] images, Category category) {
 
 		this.productName = productName;
@@ -64,11 +64,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public float getStockUnits() {
+	public int getStockUnits() {
 		return stockUnits;
 	}
 
-	public void setStockUnits(float stockUnits) {
+	public void setStockUnits(int stockUnits) {
 		this.stockUnits = stockUnits;
 	}
 

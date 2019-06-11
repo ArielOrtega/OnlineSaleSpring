@@ -1,9 +1,11 @@
 package com.yoyo.ventas.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.util.ByteArrayBuilder;
 import com.yoyo.ventas.business.CategoryBusiness;
 import com.yoyo.ventas.business.ProductBusiness;
 import com.yoyo.ventas.domain.Category;
@@ -84,19 +87,25 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/home/maintenance", method=RequestMethod.GET)
-	public String seeProducts( Model model) {
+	public String seeProducts( Model model) throws SQLException {
 		model.addAttribute("products", new ArrayList<Product>());
-		//Blob blob = productBusiness.findAll(productName).get(3).getImages()[0];
-		//model.addAttribute("blob", blob);
+
+		
 		return "productMaintenance";
 		
 		
 	}
 	
 	@RequestMapping(value="/home/maintenance", method=RequestMethod.POST)
-	public String seeProducts( Model model, @RequestParam("productName") String productName) {
+	public String seeProducts( Model model, @RequestParam("productName") String productName) throws SQLException, UnsupportedEncodingException {
 		model.addAttribute("products", productBusiness.findAll(productName));
-		//model.Blob blob = productBusiness.findAll(productName).get(3).getImages()[0];
+		//Blob blob = productBusiness.findAll("Del Inspiron 15").get(0).getImages()[0];
+		//byte byteArray[] = blob.getBytes(1, (int) blob.length());
+		//byte[] encodeBase64 = Base64.encode(blob);
+		//byte[] encodeBase64 = Base64.getEncoder().encode(blob.getBytes(1, (int) blob.length()));
+		//String base64Encoded = new String(encodeBase64, "UTF-8");
+		//model.addAttribute("blob", blob );
+		
 		//model.addAttribute("blob", blob);
 		return "productMaintenance";
 		
