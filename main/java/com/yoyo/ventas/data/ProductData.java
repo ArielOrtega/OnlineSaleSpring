@@ -125,6 +125,7 @@ public class ProductData {
 			}
 		}  
 	}
+	
 	public List<Product> findAll(String title){
 		Connection conexion = null;
 		List<Product> products;
@@ -187,6 +188,50 @@ public class ProductData {
 		Blob[] staticArray = images.toArray(new Blob[3]);  
         
 		return staticArray;
+	}
+
+	public Product findProductById(int productId) {
+		//yoyoGetProductById
+		Connection conexion = null;
+		Product product;
+		try {
+			conexion = dataSource.getConnection();
+			conexion.setAutoCommit(false);
+			CallableStatement csProduct = conexion.prepareCall("{call yoyoGetProductById(?)}");
+			csProduct.setInt(1, productId);
+			csProduct.execute();
+			
+			conexion.commit();
+			
+			ResultSet rs = csProduct.getResultSet(); 
+			
+			product = new Product();
+			while(rs.next()) {
+				product.setProductId(rs.getInt(1));
+				product.getCategory().setCategoryId(rs.getInt(2));
+				product.setDescription(rs.getString(3));
+				product.setPrice(rs.getFloat(4));
+				product.setStockUnits(rs.getInt(5));
+				product.setProductName(rs.getString(6));
+				product.getCategory().setCategoryName(rs.getString(7));
+			}
+		} catch (SQLException e) {
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				throw new RuntimeException(e1);
+			}
+			throw new RuntimeException(e);
+		}finally {
+			if(conexion != null) {
+				try {
+					conexion.close();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}  
+		return product;
 	}
 
 }

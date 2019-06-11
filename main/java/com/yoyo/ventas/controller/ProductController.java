@@ -43,6 +43,12 @@ public class ProductController {
 		return "findProducts";
 	}
 	
+	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
+	public String details(Model model, @RequestParam("productId") int productId) {
+		model.addAttribute("product", productBusiness.findProductById(productId));
+		return "productDetails";
+	}
+	
 	@RequestMapping(value="/home/register", method=RequestMethod.GET)
 	public String registerProductForm(Model model) {
 		

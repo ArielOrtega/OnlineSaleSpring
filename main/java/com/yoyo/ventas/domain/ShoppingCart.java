@@ -1,48 +1,49 @@
 package com.yoyo.ventas.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-	private int cadId;
-	private String cartGuId;
-	private String date_created;
-	private List<Product> products;
+	private int cartId;
+	private Product product;
+	private int quantity;
+	private Client client;
 	
 	public ShoppingCart() {
-		
+		product = new Product();
+		client = new Client();
 	}
 
-	public int getCadId() {
-		return cadId;
+	public int getCartId() {
+		return cartId;
 	}
 
-	public void setCadId(int cadId) {
-		this.cadId = cadId;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
-	public String getCartGuId() {
-		return cartGuId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setCartGuId(String cartGuId) {
-		this.cartGuId = cartGuId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public String getDate_created() {
-		return date_created;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setDate_created(String date_created) {
-		this.date_created = date_created;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setClient(Client client) {
+		this.client = client;
 	}
-	
 	
 }

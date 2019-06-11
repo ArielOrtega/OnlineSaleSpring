@@ -24,4 +24,8 @@ public class ProductBusiness {
 	public List<Product> findAll(String title) {
 		return productData.findAll(title);
 	}
+	
+	public Product findProductById(int productId) {
+		return productData.findProductById(productId);
+	}
 }
