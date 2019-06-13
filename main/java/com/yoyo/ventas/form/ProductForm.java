@@ -1,6 +1,7 @@
 package com.yoyo.ventas.form;
 
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -16,6 +17,7 @@ public class ProductForm {
 	@Positive
 	private float price;
 	@Positive
+	@Min(1)
 	private int stockUnits;
 	
 	private int categoryId;

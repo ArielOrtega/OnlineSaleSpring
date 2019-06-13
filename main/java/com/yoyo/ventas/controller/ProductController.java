@@ -47,9 +47,15 @@ public class ProductController {
 	
 	@RequestMapping(value="/store/products", method=RequestMethod.GET)
 	public String initiate(Model model) {
-		model.addAttribute("products", productBusiness.findTop());
+		model.addAttribute("products", productBusiness.findById(""));
 		return "findProducts";
 	}
+	
+	@RequestMapping(value="/store/products", method=RequestMethod.POST)
+	public String initiate(Model model, @RequestParam("nameProduct") String nameProduct) {
+		model.addAttribute("products", productBusiness.findById(nameProduct));
+		return "findProducts";
+	}	
 	
 	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
 	public String details(Model model, @RequestParam("productId") int productId) {
@@ -175,10 +181,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/home/maintenance/editProduct", method=RequestMethod.POST)
-	public String edit(@Valid ProductForm productForm,Model model){
+	public String edit(@Valid ProductForm productForm,BindingResult br, Model model){
 		
+		if(br.hasErrors()) {
+			model.addAttribute("productForm", productForm);
+			model.addAttribute("categories", categoryBusiness.findAll());
+			return "registerProduct";
+			
+		} 
+		else {
 		String[] images =  productBusiness.findById(productForm.getProductName()).get(0).getImages();
 		int id = productBusiness.findById(productForm.getProductName()).get(0).getProductId();
+		
 		
 		System.out.println("ALOO "+productForm.getCategoryId());
 		
@@ -190,6 +204,7 @@ public class ProductController {
 		
 		productBusiness.edit(product);
 		return "redirect:/home/maintenance";
+		}
 	}	
 						
 }

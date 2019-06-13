@@ -17,7 +17,10 @@
 		<div class="card-deck">
 		<div th:each="product: ${products}">
 			<div class="card" style="width:250px">
-			  <img class="card-img-top" src="" alt="Card image">
+			  <span th:if="${product.images.length==0}">No image</span>
+					<span th:unless="${product.images.length==0}">
+					<img style="max-height:100px" th:src="@{/images/}+${product.images[0]}">
+				</span>
 			  <div class="card-body">
 			    <h4 class="card-title" th:text="${product.productName}"></h4>
 			    <p class="card-text" th:text="${product.description}"> <h6 th:text="${'Precio: '+ product.price}"></h6> </p>
