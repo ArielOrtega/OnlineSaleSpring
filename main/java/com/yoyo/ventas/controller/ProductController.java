@@ -99,7 +99,7 @@ public class ProductController {
 		
 		productBusiness.registerProduct(product);
 		
-		return "registerProductExit";
+		return "redirect:/home/maintenance";
 		}
 	}
 
@@ -108,7 +108,7 @@ public class ProductController {
 		model.addAttribute("products", new ArrayList<Product>());
 
 		
-		return "redirect:/home/maintenance";
+		return "productMaintenance";
 		
 		
 	}
@@ -116,7 +116,7 @@ public class ProductController {
 	@RequestMapping(value="/home/maintenance", method=RequestMethod.POST)
 	public String seeProducts( Model model, @RequestParam("productName") String productName) throws SQLException, UnsupportedEncodingException {
 		model.addAttribute("products", productBusiness.findById(productName));
-		return "productmaintenance";
+		return "productMaintenance";
 		
 		
 	}	
@@ -175,10 +175,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/home/maintenance/editProduct", method=RequestMethod.POST)
-	public String edit(@Valid ProductForm productForm,Model model, @RequestParam("idProduct") int idProduct){
+	public String edit(@Valid ProductForm productForm,Model model){
 		
 		String[] images =  productBusiness.findById(productForm.getProductName()).get(0).getImages();
 		int id = productBusiness.findById(productForm.getProductName()).get(0).getProductId();
+		
+		System.out.println("ALOO "+productForm.getCategoryId());
 		
 		Category category = new Category();
 		category.setCategoryId(productForm.getCategoryId());
@@ -189,5 +191,5 @@ public class ProductController {
 		productBusiness.edit(product);
 		return "redirect:/home/maintenance";
 	}	
-			
+						
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title th:text="#{categoryMaintenance.title}"></title>
+<title>Category Maintenance</title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -24,11 +24,11 @@
 		
 		
 		<div class="form-group" >
-			<h1  th:text="#{categoryMaintenance.title}">Category Maintenance</h1>
+			<h1>Category Maintenance</h1>
 		</div>
 		
 		<form action="#" th:action="@{/home/maintenanceCategory}"	method="post">
-				<label th:text="#{categoryMaintenance.instruction}"></label> <input type="text" name="categoryName" /> <br>  <br>
+				Insert category' name: <input type="text" name="categoryName" /> <br>  <br>
 				<input type="submit" value="Buscar" />  
 		</form><br>
 		
@@ -39,12 +39,13 @@
 		
 		
 		
-		<span th:if="${categories.isEmpty()}" th:text="#{categoryMaintenance.alert}"></span>
+		<span th:if="${categories.isEmpty()}">No results</span>
 		<span th:unless="${categories.isEmpty()}">
 		<table class="table table-striped">
 			<tr>
-				<th th:text="#{categoryMaintenance.identification}"></th>
-				<th th:text="#{categoryMaintenance.name}"></th>
+				<th>Identification</th>
+				<th>Name</th>
+				<th>Action</th>
 			</tr>
 			
 			
@@ -52,12 +53,13 @@
 			<tr th:each="c : ${categories}">
 				<td><span th:text="${c.categoryId}"></span></td>
 				<td><span th:text="${c.categoryName}"></span></td>
+				
 	
 				
 				
 				<td>
-					<a th:href="@{/home/maintenanceCategory/editCategory(id=${c.categoryId}, product=${c.categoryName} )}"><img th:src="@{/images/edit.png}"></a>
-					<a th:href="@{/home/maintenanceCategory/deleteCategory(id=${c.categoryId}, product=${c.categoryName} )}"><img th:src="@{/images/delete.png}"></a>
+					<a th:href="@{/home/maintenanceCategory/editCategory(id=${c.categoryId}, category=${c.categoryName} )}"><img th:src="@{/images/edit.png}"></a>
+					<a th:href="@{/home/maintenanceCategory/deleteCategory(id=${c.categoryId}, category=${c.categoryName} )}"><img th:src="@{/images/delete.png}"></a>
 				</td>
 	
 			</tr>

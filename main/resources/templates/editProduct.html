@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title th:text="#{editProduct.title}"></title>
+<title>Insert a product</title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -28,36 +28,38 @@
 					th:action="@{/home/maintenance/editProduct}">
 
 					<div class="form-group">
-						<h1 th:text="#{editProduct.title}"></h1>
+						<h1>Edit a product</h1>
 					</div>
 
 					<span th:each="p : ${products}">
 
 						<div class="form-group">
-							<label th:text="#{editProduct.name}"></label> <input type="text" th:id="productName"
+							<label>Name</label> <input type="text" th:id="productName"
 								th:name="productName" th:value="${p.productName}">
-							<div th:if="${#fields.hasErrors('productName')}" th:text="#{editProduct.errorName}" ></div>
+							<div th:if="${#fields.hasErrors('productName')}">Must enter
+								a valid name</div>
 						</div>
 
 						<div class="form-group">
-							<label th:text="#{editProduct.stockUnits}"></label> <input type="text" th:id="stockUnits"
+							<label>Stock Units</label> <input type="text" th:id="stockUnits"
 								th:name="stockUnits" th:value="${p.stockUnits}">
-							<div th:if="${#fields.hasErrors('stockUnits')}" th:text="#{editProduct.errorStockUnits}"></div>
+							<div th:if="${#fields.hasErrors('stockUnits')}">Must enter
+								at least 1 unit</div>
 						</div>
 
 						<div class="form-group">
-							<label th:text="#{editProduct.price}"></label> <input type="text" th:id="price"
+							<label>Price</label> <input type="text" th:id="price"
 								th:name="price" th:value="${p.price}">
-							<div th:if="${#fields.hasErrors('price')}" th:text="#{editProduct.errorPrice}">Must enter a
+							<div th:if="${#fields.hasErrors('price')}">Must enter a
 								valid price</div>
 						</div>
 
 						<div class="form-group">
-							<label th:text="#{editProduct.category}"></label> <select th:name="categoryId"
+							<label>Category</label> <select th:name="categoryId"
 								th:id="categoryId">
-								<option th:selected="true" th:disabled="disabled"
+								<!--  <option th:selected="true" th:disabled="disabled"
 									th:text="${p.category.categoryName}"
-									th:value="${p.category.categoryId}"></option>
+									th:value="${p.category.categoryId}"></option> -->
 								<option th:each="category:${categories}"
 									th:value="${category.categoryId}"
 									th:text="${category.categoryName}"></option>
@@ -66,20 +68,21 @@
 						</div>
 
 						<div class="form-group">
-							<label th:text="#{editProduct.description}"></label>
+							<label>Description</label>
 						</div> <textarea name="message" rows="5" cols="30" th:id="description"
 							th:name="description" th:text="${p.description}"></textarea>
 
 
 						<div class="form-group">
-							<label th:text="#{editProduct.image}"></label> <span th:if="${p.images.length==0}"><td editProduct.image=noImage></td></span> <span th:unless="${p.images.length==0}">
+							<label>Image</label> <span th:if="${p.images.length==0}"><td>No
+									image</td></span> <span th:unless="${p.images.length==0}">
 								<td th:each="img : ${p.images}"><img
 									style="max-height: 100px" th:src="@{/images/}+${img}"></td>
 									
 					</span>
 
 					<div class="form-group">
-						<input type="submit" th:value="#{editProduct.buttonApplyChanges} >
+						<input type="submit" value="Apply changes">
 					</div>
 				</form>
 			</div>

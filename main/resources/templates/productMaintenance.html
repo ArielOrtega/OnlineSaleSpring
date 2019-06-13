@@ -24,13 +24,13 @@
 		
 		
 		<div class="form-group" >
-			<h1 th:text="#{productoMaintenance.title}"></h1>
+			<h1 th:text="#{productMaintenance.title}"></h1>
 		</div>
 		
 		<form action="#" th:action="@{/home/maintenance}"	method="post">
-				<label th:text="#{productoMaintenance.insertProductName}"></label>
+				<label th:text="#{productMaintenance.insertProductName}"></label>
 				 <input type="text" name="productName" /> <br>  <br>
-				<input type="submit" th:text="#{productoMaintenance.buttonSearch}" />  
+				<input type="submit" th:text="#{productMaintenance.buttonSearch}" />  
 		</form><br>
 		
 		 <!--  <img src="data:image/jpeg;base64,${blob}"/>
@@ -40,17 +40,18 @@
 		
 		
 		
-		<span th:if="${products.isEmpty()}" th:text="#{productoMaintenance.alert}"></span>
+		<span th:if="${products.isEmpty()}" th:text="#{productMaintenance.alert}"></span>
 		<span th:unless="${products.isEmpty()}">
 		<table class="table table-striped">
 			<tr>
-				<th th:text="#{productoMaintenance.identification}"></th>
-				<th th:text="#{productoMaintenance.name}"></th>
-				<th th:text="#{productoMaintenance.description}"></th>
-				<th th:text="#{productoMaintenance.price}"></th>
-				<th th:text="#{productoMaintenance.stockUnits}"> </th>
-				<th th:text="#{productoMaintenance.category}"></th>
-				<th th:text="#{productoMaintenance.action}"></th>
+				<th th:text="#{productMaintenance.identification}"></th>
+				<th th:text="#{productMaintenance.name}"></th>
+				<th th:text="#{productMaintenance.description}"></th>
+				<th th:text="#{productMaintenance.price}"></th>
+				<th th:text="#{productMaintenance.stockUnits}"> </th>
+				<th th:text="#{productMaintenance.category}"></th>
+				<th th:text="#{productMaintenance.image}"></th>
+				<th th:text="#{productMaintenance.action}"></th>
 			</tr>
 			
 			
@@ -63,7 +64,7 @@
 				<td><span th:text="${p.stockUnits}"></span></td>
 				<td><span th:text="${p.category.categoryName}"></span></td>
 				
-				<span th:if="${p.images.length==0}"><td th:text="#{productoMaintenance.noImages}"></td></span>
+				<span th:if="${p.images.length==0}"><td th:text="#{productMaintenance.noImages}"></td></span>
 					<span th:unless="${p.images.length==0}">
 					<td><img style="max-height:100px" th:src="@{/images/}+${p.images[0]}"></td>
 				</span>
