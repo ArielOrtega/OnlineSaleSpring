@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert a new book</title>
+<title th:text="#{insertContactInformation.title}"></title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,47 +13,47 @@
 <body class="text-center login">
 
 	<div class="container register" >
-	<h1>Register Contact Information</h1>
+	<h1 th:text="#{insertContactInformation.title2}"></h1>
 		<div class="row" >
 			<div class="col-md-8">
 			<form action="#" th:object="${contactInformationForm}" th:action="@{/singin/contactInformation}" method="POST">
 					<div class="form-group">
 					<div class="form-group">
-						<label>Phone</label>
+						<label th:text="#{insertContactInformation.phone}"></label>
 						<input type="text" th:id="phone" th:name="phone" class="form-control" th:value="${contactInformationForm.phone}">
 						<div th:if="${errorPhone != null}">
-   							<font color="red">The phone is already in use.</font>
+   							<font color="red" th:text="#{insertContactInformation.errorPhone}"></font>
 						</div>
-						<div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
-						<font color="red">Invalid phone</font>
+						<div th:if="${#fields.hasErrors('phone')}" >
+						<font color="red" th:text="#{insertContactInformation.errorPhoneN}"></font>
 						</div>
 					</div>
 					<div class="form-group">
-						<label>Phone2</label>
+						<label th:text="#{insertContactInformation.phone2}"></label>
 						<input type="text" th:id="phone2" th:name="phone2" class="form-control" th:value="${contactInformationForm.phone2}">
 						<div th:if="${errorPhone2 != null}">
-   							<font color="red">The phone is already in use.</font>
+   							<font color="red" th:text="#{insertContactInformation.errorPhone2}"></font>
 						</div>
-						<div th:if="${#fields.hasErrors('phone2')}" th:errors="*{phone2}">
-						<font color="red">Invalid phone</font>
+						<div th:if="${#fields.hasErrors('phone2')}">
+						<font color="red" th:text="#{insertContactInformation.errorPhone2N}"></font>
 						</div>
 					</div>
 					<div class="form-group">
-						<label>Fax</label>
+						<label th:text="#{insertContactInformation.fax}"></label>
 						<input type="text"  th:name="fax" th:id="fax" class="form-control" th:value="${contactInformationForm.fax}">
 						<div th:if="${errorFax != null}">
-   							<font color="red">The fax is already in use.</font>
+   							<font color="red" th:text="#{insertContactInformation.errorFax}"></font>
 						</div>
-						<div th:if="${#fields.hasErrors('fax')}" th:errors="*{fax}">
-						<font color="red">Invalid fax</font>
+						<div th:if="${#fields.hasErrors('fax')}" >
+						<font color="red" th:text="#{insertContactInformation.errorFaxN}"></font>
 						</div>
 					</div>
-					<input type="submit" value="Sing Up" onChange="saveClient" class="btn btn-primary">
+					<input type="submit" th:value="#{insertContactInformation.buttonSingUp}" onChange="saveClient" class="btn btn-primary">
 					</div>
 			</form>
 			
 						<form th:action="@{/singin/address}" method="GET">
-    					<input type="submit" value="Back" class="btn btn-danger"/>
+    					<input type="submit" th:value="#{insertContactInformation.buttonBack}" class="btn btn-danger"/>
 					</form>
 			</div>
 		</div>

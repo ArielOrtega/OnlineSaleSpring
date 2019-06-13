@@ -121,7 +121,7 @@ public class ClientController {
 			contactInformation = new ContactInformation();
 			BeanUtils.copyProperties(contactInformationForm, contactInformation);
 			clientBusiness.insertClient(address, contactInformation, client);
-			return "successSingIn";
+			return "successSingUp";
 		}//end if/else
 	}
 }//end class

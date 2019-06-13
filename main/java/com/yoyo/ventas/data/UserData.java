@@ -9,8 +9,11 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.yoyo.ventas.domain.Address;
@@ -19,12 +22,17 @@ import com.yoyo.ventas.domain.ContactInformation;
 import com.yoyo.ventas.domain.Employee;
 import com.yoyo.ventas.domain.Role;
 
+@Configuration
+@EnableWebSecurity
 @Repository
 public class UserData {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private DataSource dataSource;
+	
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	
 	public Client findByEmail(String email) {
 		String selectSql = "Select c.id_end_user, c.is_suscribed, c.last_name,"
@@ -72,7 +80,7 @@ public class UserData {
 	
 	public boolean findEmail(String email) {
 		String selectSql = "select id_address from client c, address a where a.address_line_1 = '" + email + 
-				"' or a.address_line_2 = '" + email + "'" + " or c.username = '" + email + "'"; 
+				"' or a.address_line_2 = '" + email + "'" + " or (c.username = '" + email + "' and c.id_end_user = a.client_id )"; 
 		List<Address> addressList = jdbcTemplate.query(selectSql, new RowMapper<Address>() {
 
 			@Override
@@ -143,7 +151,7 @@ public class UserData {
 			cstmt.setString(2, client.getFirstName());
 			cstmt.setString(3, client.getLastName());
 			cstmt.setString(4, client.getUsername());
-			cstmt.setString(5, client.getPassword());
+			cstmt.setString(5, passwordEncoder.encode(client.getPassword()));
 			cstmt.setBoolean(6, client.isSuscribed());
 			cstmt.setInt(7, 2);
 			cstmt.executeUpdate();
@@ -219,7 +227,6 @@ public class UserData {
 				}
 			}
 		}
-		
 		
 	}//end method insertClient
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"></meta>
-<title>Insert a category</title>
+<title th:text="${registerCategory.title}"></title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -26,17 +26,17 @@
 				<form action="#" method="POST" th:action="@{/home/addCategory}">
 					
 					<div class="form-group" >
-					<h1>Insert a new category</h1>
+					<h1 th:text="${registerCategory.title}"></h1>
 					</div>
 			
 					<div class="form-group" >
-						<label>Name</label> 
+						<label th:text="${registerCategory.name}"></label> 
 						<input type="text" th:name="categoryName" th:id="categoryName">
 						<input type="hidden" th:text="${err}">
 					</div>
 		
 					<div class="form-group">
-					<input type="submit" value="Add category">
+					<input type="submit" th:value="${registerCategory.buttonAddCategory}">
 					</div>	
 				</form>
 			</div>

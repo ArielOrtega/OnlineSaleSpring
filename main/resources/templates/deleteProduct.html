@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Delete Author</title>
+<title th:text="#{deleteProduct.title}"></title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -26,30 +26,32 @@
 				<form action="#" th:action="@{/home/maintenance/deleteProduct}"
 					th:method="POST">
 
-					<h1>Delete Author</h1>
+					<h1 th:text="#{deleteProduct.title}"></h1>
 
-					<h6>Identification</h6>
 					<input th:type="hidden" th:name="idProduct" th:text="${idProduct}"
 						th:value="${idProduct}" /> <span th:each="p : ${products}">
-						<h6>Name</h6>
+						<h6 th:text="#{deleteProduct.name}"></h6>
 						<label th:text="${p.productName}"></label>
-						<h6>Stock Units</h6>
+						<h6 th:text="#{deleteProduct.stockUnits}"></h6>
 						<label th:text="${p.stockUnits}"></label>
-						<h6>Price</h6>
+						<h6 th:text="#{deleteProduct.price}"></h6>
 						<label th:text="${p.price}"></label>
-						<h6>Category</h6>
+						<h6 th:text="#{deleteProduct.category}"></h6>
 						<label th:text="${p.category.categoryName}"></label>
-						<h6>Description</h6>
+						<h6 th:text="#{deleteProduct.description}"></h6>
 						<label th:text="${p.description}"></label>
-						<h6>Image</h6> <span th:if="${p.images.length==0}"><td>No
-								image</td></span> <span th:unless="${p.images.length==0}">
+						<h6 th:text="#{deleteProduct.image}"></h6> 
+						<span th:if="${p.images.length==0}">
+						<td th:text="#{deleteProduct.noImage}"></td>
+						</span>
+						<span th:unless="${p.images.length==0}">
 							<td th:each="img : ${p.images}"><img
 								style="max-height: 100px" th:src="@{/images/}+${img}"></td>
-					</span>
+						</span>
 
 
 
-						<p>¿Are you sure?</p> <input type="submit" value="Delete">
+						<p th:value="#{deleteProduct.alert}"></p> <input type="submit" value="Delete">
 				</form>
 			</div>
 		</div>

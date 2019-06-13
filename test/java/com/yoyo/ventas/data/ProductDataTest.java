@@ -3,7 +3,6 @@ package com.yoyo.ventas.data;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yoyo.ventas.domain.Category;
-import com.yoyo.ventas.domain.Product;
-
-
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,13 +32,6 @@ public class ProductDataTest {
 			//	, 500000,3, m,c);
 		//pData.registerProduct(product);
 		
-	}
-	
-	@Test
-	public void findAll() {
-		List<Product> products = pData.findAll("Dell Inspiron");
-		assertNotNull(products); //no puede ser nula
-		assertTrue(!products.isEmpty()); 		
 	}
 	
 	@Test

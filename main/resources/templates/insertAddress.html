@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert a new book</title>
+<title th:text="#{insertAddress.title}"></title>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -12,50 +12,50 @@
 </head>
 <body class="text-center login">
 <div class="container register" >
-	<h1>Register Address</h1>
+	<h1 class="centralTitle" th:text="#{insertAddress.title2}"></h1>
 		<div class="row" >
 			<div class="col-md-8">
 			<form action="#" th:object="${addressForm}" th:action="@{/singin/address}" method="POST">
 					<div class="form-group">
 					<div class="form-group">
-						<label>Address Line 2</label>
+						<label th:text="#{insertAddress.addressLine2}"></label>
 						<input type="email" th:id="addressLine2" th:name="addressLine2" class="form-control" th:value="${addressForm.addressLine2}">
 						<div th:if="${errorPhone != null}">
-   							<font color="red">The address is already in use. Please enter another</font>
+   							<font color="red" th:text="#{insertAddress.errorAddressLine2}"></font>
 						</div>
 						<div th:if="${#fields.hasErrors('addressLine2')}" >
-						<font color="red">Invalid address</font>
+						<font color="red" th:text="#{insertAddress.errorAddressLine22}"></font>
 						</div>
 					</div>
 					<div class="form-group">
-						<label>City</label>
+						<label th:text="#{insertAddress.city}"></label>
 						<input type="text" th:id="city" th:name="city" class="form-control" th:value="${addressForm.city}">
 						<div th:if="${#fields.hasErrors('city')}" >
-						<font color="red">Invalid City</font>
+						<font color="red" th:text="#{insertAddress.errorCity}"></font>
 						</div>
 					</div>
 					<div class="form-group">
-						<label>State</label>
+						<label th:text="#{insertAddress.state}"></label>
 						<input type="text"  th:name="state" th:id="state" class="form-control" th:value="${addressForm.state}">
 						<div th:if="${#fields.hasErrors('state')}" >
-						<font color="red">Invalid State</font>
+						<font color="red" th:text="#{insertAddress.errorState}"></font>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label>Postal Code</label>
+						<label th:text="#{insertAddress.postalCode}"></label>
 						<input type="text" th:name="postalCode" th:id="postalCode" class="form-control" th:value="${addressForm.postalCode}">
 						<div th:if="${#fields.hasErrors('postalCode')}" >
-						<font color="red">Invalid Postal Code</font>
+						<font color="red" th:text="#{insertAddress.errorPostalCode}"></font>
 						</div>
 					</div>
 					
 					
-					<input type="submit" value="Next" onChange="insertContactInformation" class="btn btn-primary">
+					<input type="submit" th:value="#{insertAddress.buttonNext}" onChange="insertContactInformation" class="btn btn-primary">
 					</div>
 			</form>
 					<form th:action="@{/singin/client}" method="GET">
-    					<input type="submit" value="Back" class="btn btn-danger"/>
+    					<input type="submit" th:value="#{insertAddress.buttonBack}" class="btn btn-danger"/>
 					</form>
 			</div>
 		</div>

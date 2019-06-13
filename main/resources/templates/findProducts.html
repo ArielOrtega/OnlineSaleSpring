@@ -3,7 +3,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>Products - YOYO</title>
+<title  th:text="#{findProducts.title}"></title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="../static/findProduct.css" th:href="@{/findProduct.css}" rel="stylesheet" />
 </head>
@@ -11,7 +11,7 @@
 <nav th:replace="menuNav :: header">
 
 </nav>
-<h1 class="centralTitle">Looking for something?</h1>
+<h1 class="centralTitle" th:text="#{findProducts.centralTitle}"></h1>
 <div class="container-fluid">
 	<div class="row">
 		<div class="card-deck">
@@ -21,7 +21,7 @@
 			  <div class="card-body">
 			    <h4 class="card-title" th:text="${product.productName}"></h4>
 			    <p class="card-text" th:text="${product.description}"> <h6 th:text="${'Precio: '+ product.price}"></h6> </p>
-			    <a th:href="@{'/store/product/details'(productId=${product.productId})}" class="btn btn-primary">Details</a>
+			    <a th:href="@{'/store/product/details'(productId=${product.productId})}" class="btn btn-primary" th:text="#{findProducts.details}"></a>
 			  </div>
 			</div>
 		</div>

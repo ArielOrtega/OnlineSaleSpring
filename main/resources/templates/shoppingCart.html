@@ -3,110 +3,42 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title>My cart -YOYO</title>
+<title th:text="#{shoppingCart.title}"></title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="../static/shoppingCart.css" th:href="@{/shoppingCart.css}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <nav th:replace="menuNav :: header">
 	
 </nav>
 <div class="container">
-   <div class="card shopping-cart">
-            <div class="card-header bg-dark text-light">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                Shopping cart
-                <a href="" class="btn btn-outline-info btn-sm pull-right">Continiu shopping</a>
-                <div class="clearfix"></div>
-            </div>
-            <div class="card-body">
-                    <!-- PRODUCT -->
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80">
-                        </div>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>Product Name</strong></h4>
-                            <h4>
-                                <small>Product description</small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                            </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" value="+" class="plus">
-                                    <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                           size="4">
-                                    <input type="button" value="-" class="minus">
-                                </div>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- END PRODUCT -->
-                    <!-- PRODUCT -->
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80">
-                        </div>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>Product Name</strong></h4>
-                            <h4>
-                                <small>Product description</small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                            </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" value="+" class="plus">
-                                    <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                           size="4">
-                                    <input type="button" value="-" class="minus">
-                                </div>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- END PRODUCT -->
-                <div class="pull-right">
-                    <a href="" class="btn btn-outline-secondary pull-right">
-                        Update shopping cart
-                    </a>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="cupone code">
-                        </div>
-                        <div class="col-6">
-                            <input type="submit" class="btn btn-default" value="Use cupone">
-                        </div>
-                    </div>
-                </div>
-                <div class="pull-right" style="margin: 10px">
-                    <a href="" class="btn btn-success pull-right">Checkout</a>
-                    <div class="pull-right" style="margin: 5px">
-                        Total price: <b>50.00€</b>
-                    </div>
-                </div>
-            </div>
-        </div>
+   <div class="table-responsive"  id="tableCart">
+   <h2 th:text="#{shoppingCart.title}"></h2>
+   	<table class="table table-striped">
+   		<thead class="thead-dark">
+		    <tr>
+		      <th scope="col" th:text="#{shoppingCart.id}"></th>
+		      <th scope="col" th:text="#{shoppingCart.name}"></th>
+		      <th scope="col" th:text="#{shoppingCart.priceUnit}"></th>
+		      <th scope="col" th:text="#{shoppingCart.quantity}"></th>
+		      <th scope="col" th:text="#{shoppingCart.remove}"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="cart: ${carts}">
+		      <th scope="row"><span th:text="${cart.product.productId}"></span></th>
+		      <td><span th:text="${cart.product.productName}"></span></td>
+		      <td><span th:text="${cart.product.price}"></span></td>
+		      <td><input type="number" th:value="${cart.quantity}"></td>
+		      <td><a th:href="@{/store/shoppingCart/remove(productId=${cart.product.productId})}"class="btn btn-danger"><i class="fa fa-trash" style="font-size:18px"></i></a></td>
+		    </tr>
+		  </tbody>
+   	</table>
+   </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
