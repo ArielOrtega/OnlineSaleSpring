@@ -56,8 +56,7 @@ public class CategoryController {
 	@RequestMapping(value="/home/maintenanceCategory", method=RequestMethod.GET)
 	public String seeProducts( Model model) throws SQLException {
 		model.addAttribute("categories", new ArrayList<Category>());
-		
-		
+		return "categoryMaintenance";
 	}
 	
 	@RequestMapping(value="/home/maintenanceCategory", method=RequestMethod.POST)

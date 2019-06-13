@@ -150,4 +150,14 @@ public class ShoppingCartData {
 			}
 		} 
 	}
+	
+	public float getTotalPrice(List<ShoppingCart> carts) {
+		float total = 0;
+		for (int i = 0; i < carts.size(); i++) {
+			
+			total += (carts.get(i).getProduct().getPrice() * carts.get(i).getQuantity());
+			
+		}
+		return total;
+	}
 }

@@ -3,7 +3,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
-<title th:text="#{shoppingCart.title}"></title>
+<title>My cart -YOYO</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="../static/shoppingCart.css" th:href="@{/shoppingCart.css}" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,15 +14,15 @@
 </nav>
 <div class="container">
    <div class="table-responsive"  id="tableCart">
-   <h2 th:text="#{shoppingCart.title}"></h2>
+   <h2>My Shopping Cart</h2>
    	<table class="table table-striped">
    		<thead class="thead-dark">
 		    <tr>
-		      <th scope="col" th:text="#{shoppingCart.id}"></th>
-		      <th scope="col" th:text="#{shoppingCart.name}"></th>
-		      <th scope="col" th:text="#{shoppingCart.priceUnit}"></th>
-		      <th scope="col" th:text="#{shoppingCart.quantity}"></th>
-		      <th scope="col" th:text="#{shoppingCart.remove}"></th>
+		      <th scope="col">ID</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Price by unit</th>
+		      <th scope="col">Quantity</th>
+		      <th scope="col">Remove</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -35,6 +35,9 @@
 		    </tr>
 		  </tbody>
    	</table>
+   	<div class="form-group">
+   		<label>Total: $</label><span th:text="${totalPrice}"></span>
+   	</div>
    </div>
 </div>
 </body>

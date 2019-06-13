@@ -1,5 +1,7 @@
 package com.yoyo.ventas.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -42,14 +44,18 @@ public class ShoppingCartController {
 	
 	@RequestMapping(value="/store/shoppingCart/check", method=RequestMethod.GET)
 	public String checkShoppingCart(Model model) {
-		model.addAttribute("carts", shoppingCartBusiness.getShoppingCart());
+		List<ShoppingCart> carts = shoppingCartBusiness.getShoppingCart();
+		model.addAttribute("carts", carts);
+		model.addAttribute("totalPrice", carts);
 		return "shoppingCart";
 	}
 	
 	@RequestMapping(value="/store/shoppingCart/remove", method=RequestMethod.GET)
 	public String removeProduct(Model model, @RequestParam("productId") int productId) {
 		shoppingCartBusiness.removeProductCart(productId);
-		model.addAttribute("carts", shoppingCartBusiness.getShoppingCart());
+		List<ShoppingCart> carts = shoppingCartBusiness.getShoppingCart();
+		model.addAttribute("carts", carts);
+		model.addAttribute("totalPrice", shoppingCartBusiness.getTotalPrice(carts));
 		return "shoppingCart";
 	}
 }

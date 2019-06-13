@@ -24,4 +24,8 @@ public class ShoppingCartBusiness {
 	public void removeProductCart(int productId) {
 		shoppingCartData.removeProductCart(productId);
 	}
+	
+	public float getTotalPrice(List<ShoppingCart> carts) {
+		return shoppingCartData.getTotalPrice(carts);
+	}
 }
