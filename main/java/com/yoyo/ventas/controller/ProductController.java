@@ -51,6 +51,11 @@ public class ProductController {
 		return "findProducts";
 	}
 	
+	@RequestMapping(value="/store/about", method=RequestMethod.GET)
+	public String about(Model model) {
+		return "aboutYoyo";
+	}
+	
 	@RequestMapping(value="/store/products", method=RequestMethod.POST)
 	public String initiate(Model model, @RequestParam("nameProduct") String nameProduct) {
 		model.addAttribute("products", productBusiness.findById(nameProduct));
@@ -59,8 +64,11 @@ public class ProductController {
 	
 	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
 	public String details(Model model, @RequestParam("productId") int productId) {
+		List<Product> products = new ArrayList<>();
+		products.add(productBusiness.findProductById(productId));
 		model.addAttribute("product", productBusiness.findProductById(productId));
 		model.addAttribute("shoppingCartForm", new ShoppingCartForm());
+		model.addAttribute("products", products);
 		return "productDetails";
 	}
 	

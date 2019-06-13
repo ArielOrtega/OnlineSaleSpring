@@ -14,14 +14,19 @@
 	
 <div class="container-fluid" layout:fragment="content">
 	<div class="row">
-			<div>images</div>
-			<div>
+			<div class="col-sm-4">
+				<span th:if="${product.images.length==0}">No image</span>
+					<span th:unless="${product.images.length==0}">
+					<img style="max-height:100px" th:src="@{/images/}+${product.images[0]}">
+				</span>
+			</div>
+			<div class="col-sm-4">
 				<h2 th:text="${product.productName}" ></h2>
 				<h6 th:text="${product.category.categoryName}"></h6> <br>
 				<span th:text="${product.description}" ></span><br>
 				<span th:text="${product.stockUnits + ' units on stock'}"></span>
 			</div>
-			<div>
+			<div class="col-sm-4">
 				<div class="card" style="width:250px">
 				  <div class="card-body">
 				  		<form action="#" th:action="@{/store/shoppingCart/add}" th:object="${shoppingCartForm}" method="GET">
