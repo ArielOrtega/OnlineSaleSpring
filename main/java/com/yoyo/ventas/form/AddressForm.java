@@ -6,6 +6,9 @@ import javax.validation.constraints.Size;
 public class AddressForm {
 	
 	private int addressId;
+	@NotNull
+	@Size(min=2, max=50)
+	private String addressLine;
 	private String addressLine2;
 	@NotNull
 	@Size(min=2, max=50)
@@ -19,6 +22,13 @@ public class AddressForm {
 	
 	public AddressForm() {
 		
+	}
+
+	public String getAddressLine() {
+		return addressLine;
+	}
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
 
 	public int getAddressId() {

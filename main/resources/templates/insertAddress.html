@@ -18,11 +18,15 @@
 			<form action="#" th:object="${addressForm}" th:action="@{/singin/address}" method="POST">
 					<div class="form-group">
 					<div class="form-group">
-						<label th:text="#{insertAddress.addressLine2}"></label>
-						<input type="email" th:id="addressLine2" th:name="addressLine2" class="form-control" th:value="${addressForm.addressLine2}">
-						<div th:if="${errorPhone != null}">
-   							<font color="red" th:text="#{insertAddress.errorAddressLine2}"></font>
+						<label th:text="#{insertAddress.addressLine}"></label>
+						<textarea rows="5" cols="30" class="form-control" th:id="addressLine" th:name="addressLine" th:value="${addressForm.addressLine}" ></textarea>
+						<div th:if="${#fields.hasErrors('addressLine')}" >
+						<font color="red" th:text="#{insertAddress.errorAddressLine22}"></font>
 						</div>
+					</div>
+					<div class="form-group">
+						<label th:text="#{insertAddress.addressLine2}"></label>
+						<textarea rows="5" cols="30" class="form-control" th:id="addressLine2" th:name="addressLine2" th:value="${addressForm.addressLine2}" ></textarea>
 						<div th:if="${#fields.hasErrors('addressLine2')}" >
 						<font color="red" th:text="#{insertAddress.errorAddressLine22}"></font>
 						</div>

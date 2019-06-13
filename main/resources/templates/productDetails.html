@@ -15,10 +15,12 @@
 <div class="container-fluid" layout:fragment="content">
 	<div class="row">
 			<div class="col-sm-4">
-				<span th:if="${product.images.length==0}">No image</span>
-					<span th:unless="${product.images.length==0}">
-					<img style="max-height:100px" th:src="@{/images/}+${product.images[0]}">
-				</span>
+				<div th:each="product: ${products}">
+				  <span th:if="${product.images.length==0}">No image</span>
+						<span th:unless="${product.images.length==0}">
+						<img style="max-height:100px" th:src="@{/images/}+${product.images[0]}">
+					</span>
+			</div>
 			</div>
 			<div class="col-sm-4">
 				<h2 th:text="${product.productName}" ></h2>

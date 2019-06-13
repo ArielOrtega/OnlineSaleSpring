@@ -72,12 +72,7 @@ public class ClientController {
 	
 	@RequestMapping(value="/singin/address", method=RequestMethod.POST)
 	public String getAddress(@Valid AddressForm addressForm, BindingResult br, Model model) {
-		if(clientBusiness.findEmail(addressForm.getAddressLine2()) != false) {
-			model.addAttribute("addressForm", addressForm);
-			model.addAttribute("errorEmail", "The address is already in use");
-			return "insertAddress";	
-		} 
-		else if(br.hasErrors()) {
+		 if(br.hasErrors()) {
 			model.addAttribute("addressForm", addressForm);
 			return "insertAddress";	
 		} else {

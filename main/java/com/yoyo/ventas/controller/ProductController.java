@@ -64,11 +64,10 @@ public class ProductController {
 	
 	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
 	public String details(Model model, @RequestParam("productId") int productId) {
-		List<Product> products = new ArrayList<>();
-		products.add(productBusiness.findProductById(productId));
-		model.addAttribute("product", productBusiness.findProductById(productId));
+		Product product = productBusiness.findProductById(productId);
+		model.addAttribute("product", product);
 		model.addAttribute("shoppingCartForm", new ShoppingCartForm());
-		model.addAttribute("products", products);
+		model.addAttribute("products", productBusiness.findById(product.getProductName()));
 		return "productDetails";
 	}
 	

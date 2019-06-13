@@ -15,13 +15,13 @@
 
 </nav>
 <div class="container register" >
-	<h1 th:text="#{singin.title}"></h1>
+	<h1 th:text="#{successSingUp.title}"></h1>
 		<div class="row" >
 			<div class="col-md-8">
 			
-			<label th:text="#{singin.messageSuccess}"></label>
+			<label th:text="#{successSingUp.messageSuccess}"></label>
 					<form th:action="@{/login}" method="GET">
-    					<input type="submit" th:value="#{singin.buttonLogin}" class="btn btn-primary"/>
+    					<input type="submit" th:value="#{successSingUp.buttonLogin}" class="btn btn-primary"/>
 					</form>
 		</div>
 	</div>
