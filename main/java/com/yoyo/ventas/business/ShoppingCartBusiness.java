@@ -1,5 +1,7 @@
 package com.yoyo.ventas.business;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,13 @@ public class ShoppingCartBusiness {
 	
 	public int saveShoppingCart(ShoppingCart shoppingCart) {
 		return shoppingCartData.saveShoppingCart(shoppingCart);
+	}
+	
+	public List<ShoppingCart> getShoppingCart(){
+		return shoppingCartData.getShoppingCart();
+	}
+	
+	public void removeProductCart(int productId) {
+		shoppingCartData.removeProductCart(productId);
 	}
 }

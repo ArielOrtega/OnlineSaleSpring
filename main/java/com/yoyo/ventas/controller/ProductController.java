@@ -34,6 +34,7 @@ import com.yoyo.ventas.business.ProductBusiness;
 import com.yoyo.ventas.domain.Category;
 import com.yoyo.ventas.domain.Product;
 import com.yoyo.ventas.form.ProductForm;
+import com.yoyo.ventas.form.ShoppingCartForm;
 
 @Controller
 public class ProductController {
@@ -48,6 +49,13 @@ public class ProductController {
 	public String initiate(Model model) {
 		model.addAttribute("products", productBusiness.findTop());
 		return "findProducts";
+	}
+	
+	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
+	public String details(Model model, @RequestParam("productId") int productId) {
+		model.addAttribute("product", productBusiness.findProductById(productId));
+		model.addAttribute("shoppingCartForm", new ShoppingCartForm());
+		return "productDetails";
 	}
 	
 	@RequestMapping(value="/home/register", method=RequestMethod.GET)
