@@ -1,20 +1,25 @@
 package com.yoyo.ventas.form;
 
-import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductForm {
-	@NotNull
+	@NotEmpty
+	@Size(min=2, max=50)
 	private String productName;
+	@NotEmpty
 	private String description;
-	@NotNull
+	@Positive
 	private float price;
-	@NotNull
+	@Positive
 	private int stockUnits;
-	@NotNull
+	
 	private int categoryId;
-	@NotNull
+	//@Length(min=1, max=3)
 	private MultipartFile[] images;
 	
 	public ProductForm() {

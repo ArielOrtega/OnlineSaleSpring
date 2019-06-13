@@ -48,7 +48,7 @@
 					</div>	
 					
 					<div class="form-group">
-						<label>Categoría</label> <select th:field="*{categoryId}">
+						<label>Category</label> <select th:field="*{categoryId}">
 							<option th:each="category:${categories}"
 								th:value="${category.categoryId}"
 								th:text="${category.categoryName}"></option>
@@ -64,8 +64,7 @@
 					<div class="form-group">
 					<label>Select an image</label>
 					<input type="file" name="images"  th:field="*{images}" multiple> 
-					<div th:if="${#fields.hasErrors('images')}" >Must select one
-							or more images</div>
+					<div th:if="${#fields.hasErrors('images')}" >Must select one or a maximun of three images</div>
 					</div>	
 					
 					<div class="form-group">

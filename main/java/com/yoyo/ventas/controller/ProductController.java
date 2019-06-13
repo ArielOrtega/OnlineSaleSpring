@@ -1,13 +1,20 @@
 package com.yoyo.ventas.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 import javax.validation.Valid;
@@ -43,14 +50,8 @@ public class ProductController {
 		return "findProducts";
 	}
 	
-	@RequestMapping(value="/store/product/details", method=RequestMethod.GET)
-	public String details(Model model, @RequestParam("productId") int productId) {
-		model.addAttribute("product", productBusiness.findProductById(productId));
-		return "productDetails";
-	}
-	
 	@RequestMapping(value="/home/register", method=RequestMethod.GET)
-	public String registerProductForm(Model model) {
+	public String registerProductForm(Model model, HttpServletRequest request) {
 		
 		model.addAttribute("productForm", new ProductForm());
 		model.addAttribute("categories", categoryBusiness.findAll());
@@ -64,32 +65,34 @@ public class ProductController {
 		//StringBuilder fileNames = new StringBuilder();
 
 		if(br.hasErrors()) {
-			model.addAttribute("productForm", new ProductForm());
+			model.addAttribute("productForm", productForm);
 			model.addAttribute("categories", categoryBusiness.findAll());
 			return "registerProduct";
 			
-		}
+		} else {
 		
 		Category category = new Category();
 		category.setCategoryId(productForm.getCategoryId());
 		
 		MultipartFile[] files = productForm.getImages();
-		Blob[] images= new Blob[files.length];
+		String[] images= new String[files.length];
 		int i= files.length - 1;
-		for (MultipartFile img : files) {
-			Blob blob = new SerialBlob(img.getBytes());
-			images[i]= blob;
+		for (MultipartFile file : files) {
+			String imgString = writeToDisk(file);
+			images[i]= imgString;
 			if(i==0)
 				break;
 			i--;
 		}
-		
+
 		Product product = new Product(productForm.getProductName(),
 				productForm.getDescription(), productForm.getPrice(), productForm.getStockUnits(), 
 				images, category);
 		
 		productBusiness.registerProduct(product);
+		
 		return "registerProductExit";
+		}
 	}
 
 	@RequestMapping(value="/home/maintenance", method=RequestMethod.GET)
@@ -97,24 +100,86 @@ public class ProductController {
 		model.addAttribute("products", new ArrayList<Product>());
 
 		
-		return "productMaintenance";
+		return "redirect:/home/maintenance";
 		
 		
 	}
 	
 	@RequestMapping(value="/home/maintenance", method=RequestMethod.POST)
 	public String seeProducts( Model model, @RequestParam("productName") String productName) throws SQLException, UnsupportedEncodingException {
-		model.addAttribute("products", productBusiness.findAll(productName));
-		//Blob blob = productBusiness.findAll("Del Inspiron 15").get(0).getImages()[0];
-		//byte byteArray[] = blob.getBytes(1, (int) blob.length());
-		//byte[] encodeBase64 = Base64.encode(blob);
-		//byte[] encodeBase64 = Base64.getEncoder().encode(blob.getBytes(1, (int) blob.length()));
-		//String base64Encoded = new String(encodeBase64, "UTF-8");
-		//model.addAttribute("blob", blob );
-		
-		//model.addAttribute("blob", blob);
-		return "productMaintenance";
+		model.addAttribute("products", productBusiness.findById(productName));
+		return "productmaintenance";
 		
 		
 	}	
+	
+	public String writeToDisk(MultipartFile file) {
+		
+	
+		Path resourceDirectory = Paths.get("src","main","resources","static","images");
+		String imageToBd = "";
+		
+		File dir = new File(resourceDirectory.toString());
+		if(!dir.exists()) {
+			dir.mkdir();
+		}
+		
+		File serverFile = new File(dir.getAbsolutePath()+File.separator+file.getOriginalFilename());
+		imageToBd = file.getOriginalFilename();
+		
+        try {
+            try (InputStream is = file.getInputStream(); BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
+                int i;
+                while ((i = is.read()) != -1) {
+                    stream.write(i);
+                }
+                stream.flush();
+            }
+        } catch (IOException e) {
+            System.out.println("error : " + e.getMessage());
+        }
+		return imageToBd;
+	}
+
+	@RequestMapping(value="/home/maintenance/deleteProduct", method=RequestMethod.GET)
+	public String delete(Model model,  @RequestParam("id") int idProduct,
+			@RequestParam("product") String productName) {
+		model.addAttribute("idProduct", idProduct);
+		model.addAttribute("products", productBusiness.findById(productName));
+		return "deleteProduct";
+	}
+	
+	@RequestMapping(value="/home/maintenance/deleteProduct", method=RequestMethod.POST)
+	public String delete(Model model, @RequestParam("idProduct") int idProduct){
+		
+		productBusiness.delete(idProduct);
+		return "redirect:/home/maintenance";
+	}	
+		
+	@RequestMapping(value="/home/maintenance/editProduct", method=RequestMethod.GET)
+	public String edit(Model model,  @RequestParam("id") int idProduct,
+			@RequestParam("product") String productName) {
+		model.addAttribute("idProduct", idProduct);
+		model.addAttribute("products", productBusiness.findById(productName));
+		model.addAttribute("productForm", new ProductForm());
+		model.addAttribute("categories", categoryBusiness.findAll());
+		return "editProduct";
+	}
+	
+	@RequestMapping(value="/home/maintenance/editProduct", method=RequestMethod.POST)
+	public String edit(@Valid ProductForm productForm,Model model, @RequestParam("idProduct") int idProduct){
+		
+		String[] images =  productBusiness.findById(productForm.getProductName()).get(0).getImages();
+		int id = productBusiness.findById(productForm.getProductName()).get(0).getProductId();
+		
+		Category category = new Category();
+		category.setCategoryId(productForm.getCategoryId());
+		Product product = new Product(id, productForm.getProductName(),
+				productForm.getDescription(), productForm.getPrice(), productForm.getStockUnits(), 
+				images, category);
+		
+		productBusiness.edit(product);
+		return "redirect:/home/maintenance";
+	}	
+			
 }

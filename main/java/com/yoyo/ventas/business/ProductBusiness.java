@@ -21,11 +21,20 @@ public class ProductBusiness {
 		productData.registerProduct(product);
 	}
 	
-	public List<Product> findAll(String title) {
-		return productData.findAll(title);
+	public List<Product> findById(String title) {
+		return productData.findById(title);
 	}
 	
 	public Product findProductById(int productId) {
 		return productData.findProductById(productId);
 	}
+	
+	public void delete(int idProduct) {
+		productData.delete(idProduct);
+	}
+
+	public void edit(Product product) {
+		productData.edit(product);
+		
+	}	
 }

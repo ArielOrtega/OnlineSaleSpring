@@ -13,16 +13,16 @@ public class Product {
 	private String description;
 	private float price;
 	private int stockUnits;
-	private Blob[] images;
+	private String[] images;
 	private Category category;
 	
 	public Product() {
-		images = new Blob[3];
+		images = new String[3];
 		category = new Category();
 	}	
 
 	public Product(String productName, String description, float price, int stockUnits,
-			Blob[] images, Category category) {
+			String[] images, Category category) {
 
 		this.productName = productName;
 		this.description = description;
@@ -31,6 +31,18 @@ public class Product {
 		this.images = images;
 		this.category = category;
 	}
+	
+	public Product(int productId, String productName, String description, float price, int stockUnits,
+			String[] images, Category category) {
+
+		this.productId = productId;
+		this.productName = productName;
+		this.description = description;
+		this.price = price;
+		this.stockUnits = stockUnits;
+		this.images = images;
+		this.category = category;
+	}	
 
 	public int getProductId() {
 		return productId;
@@ -72,11 +84,11 @@ public class Product {
 		this.stockUnits = stockUnits;
 	}
 
-	public Blob[] getImages() {
+	public String[] getImages() {
 		return images;
 	}
 
-	public void setImages(Blob[] images) {
+	public void setImages(String[] images) {
 		this.images = images;
 	}
 
