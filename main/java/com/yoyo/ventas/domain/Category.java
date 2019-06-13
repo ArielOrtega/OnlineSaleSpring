@@ -8,6 +8,12 @@ public class Category {
 	public Category() {
 		tax = new Tax();
 	}
+		
+	public Category(int categoryId, String categoryName) {
+
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+	}
 
 	public int getCategoryId() {
 		return categoryId;
