@@ -46,7 +46,11 @@ public class ShoppingCartController {
 	public String checkShoppingCart(Model model) {
 		List<ShoppingCart> carts = shoppingCartBusiness.getShoppingCart();
 		model.addAttribute("carts", carts);
-		model.addAttribute("totalPrice", carts);
+		float totalPrice = 0;
+		for(int i = 0; i < carts.size(); i++) {
+			totalPrice += (carts.get(i).getProduct().getPrice() * carts.get(i).getQuantity());
+		}
+		model.addAttribute("totalPrice", totalPrice);
 		return "shoppingCart";
 	}
 	
